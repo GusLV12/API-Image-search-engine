@@ -1,0 +1,44 @@
+html{
+  box-sizing: content-box;
+}
+
+html * {
+  box-sizing: inherit;
+}
+
+header{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(74, 72, 72);
+  padding: 22px;
+  box-shadow: 1px 2px 5px rgb(0,0,0,0.3);
+  z-index: 2;
+  position: relative;
+}
+
+header input{
+  outline: none;
+  border: transparent;
+  padding: 10px 5px;
+  border-radius: 5px;
+  background-color: rgb(74, 72, 72);
+  color: white;
+  width: 300px;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+header input:hover{
+  border: transparent;
+  color: white;
+  background-color: rgb(74, 72, 72);
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 300px;
+  text-align: center
+}
+
+header input::placeholder {
+  color: white;
+}
