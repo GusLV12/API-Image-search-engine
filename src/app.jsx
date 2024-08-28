@@ -6,29 +6,36 @@ import './article.css';
 
 export function App() {
   const [photos, setPhotos] = useState([]);
+  const initialValues = {
+    search: '',
+  }
+
+  // * Feature redirection image to image unsplash
   const open = url => window.open(url);
+
+  const handleUnsplash = async (values) => {
+    // Llamando a la API "unplash"
+    const response = await fetch(`https://api.unsplash.com/search/photos?per_page=20&query=${values.search}`, 
+      {
+        headers: {
+          'Authorization': 'Client-ID W8NHUMCV5dY3LpB7hXOyTopA4sALRH25cuiKnnwXS_w'
+        }
+      });
+
+      const data = await response.json();
+      setPhotos(data.results); // Actualizar el estado con los nuevos datos
+  }
 
   console.log({ photos });
   return (
     <div>
       <header>
         <Formik 
-          initialValues={{ search: '' }}
-          onSubmit={async values => {
-            // Llamando a la API "unplash"
-            const response = await fetch(`https://api.unsplash.com/search/photos?per_page=20&query=${values.search}`, 
-            {
-              headers: {
-                'Authorization': 'Client-ID W8NHUMCV5dY3LpB7hXOyTopA4sALRH25cuiKnnwXS_w'
-              }
-            });
-
-            const data = await response.json();
-            setPhotos(data.results); // Actualizar el estado con los nuevos datos
-          }}
+          initialValues
+          onSubmit={handleUnsplash}
         >
           <Form>
-            <Field  autoComplete="off" name="search" placeholder='Search'/>
+            <Field  autoComplete="off" name="search" placeholder='Search...'/>
           </Form>
         </Formik>
       </header>
